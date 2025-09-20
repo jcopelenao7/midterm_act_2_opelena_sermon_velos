@@ -33,6 +33,11 @@ function Nav() {
                   {/* <span class="visually-hidden">(current)</span> */}
                 </NavLink>
               </li>
+              <li class="nav-item">
+                <NavLink className="nav-link" to="/About" activeclassname="active">About Us
+                  {/* <span class="visually-hidden">(current)</span> */}
+                </NavLink>
+              </li>
               {/* <li class="nav-item">
                 <a class="nav-link keychainify-checked" href="#">About</a>
               </li>

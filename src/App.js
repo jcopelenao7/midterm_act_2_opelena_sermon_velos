@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
 import Login from './pages/Login';
 import Calculator from './pages/Calculator';
+import About from './pages/AboutUs';
 
 
 
@@ -28,6 +29,8 @@ function App() {
           <Route exact path="/portfolio" element={<Portfolio />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/calculator" element={<Calculator />} />
+          <Route exact path="/about" element={<About />} />
+          
         </Route>
       </Routes>
     </Router>
