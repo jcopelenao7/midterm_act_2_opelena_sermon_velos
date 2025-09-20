@@ -30,7 +30,7 @@ function AboutUs() {
             <div className="card-body">
               <h5 className="card-title">Jesiah Opeleña</h5>
               <p className="card-text">
-                i did something.
+                She's a 10, turning 11.
               </p>
               <div className="dev-links">
                 <a href="#" target="_blank" rel="noreferrer">GitHub</a>
@@ -52,7 +52,7 @@ function AboutUs() {
             <div className="card-body">
               <h5 className="card-title">Godffrey Paul Sermon</h5>
               <p className="card-text">
-                The God.
+                I can't clear MoC.
               </p>
               <div className="dev-links">
                 <a href="#" target="_blank" rel="noreferrer">GitHub</a>

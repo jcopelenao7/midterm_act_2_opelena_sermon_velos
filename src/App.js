@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import About from './pages/AboutUs';
 import Eternals from './pages/Eternals';
+import Error from './pages/Error';
 
 // Eternals user data WITH unique passwords
 const eternalsUsers = {
@@ -56,7 +57,7 @@ const NavBarLayout = ({ currentUser, onLogout }) => {
   return (
     <>
       <Nav currentUser={currentUser} onLogout={onLogout} />
-      <Outlet />
+      <Outlet context={{ currentUser, onLogout }} />
     </>
   );
 };
@@ -91,7 +92,6 @@ function App() {
     return children;
   };
 
-
   return (
     <Router>
       <div className={`app-container ${currentUser?.theme || ''}`}>
@@ -116,6 +116,8 @@ function App() {
                 <Eternals currentUser={currentUser} eternalsUsers={eternalsUsers} />
               </ProtectedRoute>
             } />
+            {/* Catch-all route for 404 errors - MUST be last */}
+            <Route path="*" element={<Error />} />
           </Route>
         </Routes>
       </div>
