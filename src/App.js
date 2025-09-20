@@ -1,40 +1,125 @@
-// import logo from './logo.svg';
+// App.js
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
+import { useState } from 'react';
 import Nav from './Nav';
 import Home from './pages/Home'; 
-import Portfolio from './pages/Portfolio';
 import Login from './pages/Login';
-import Calculator from './pages/Calculator';
 import About from './pages/AboutUs';
+import Eternals from './pages/Eternals';
 
+// Eternals user data WITH unique passwords
+const eternalsUsers = {
+  sersi: {
+    name: 'Sersi',
+    theme: 'sersi-theme',
+    role: 'eternal',
+    powers: 'Matter Manipulation',
+    status: 'alive',
+    password: 'eternal'
+  },
+  thena: {
+    name: 'Thena',
+    theme: 'thena-theme', 
+    role: 'eternal',
+    powers: 'Weapon Manifestation',
+    status: 'alive',
+    password: 'eternal'
+  },
+  gilgamesh: {
+    name: 'Gilgamesh',
+    theme: 'gilgamesh-theme',
+    role: 'eternal', 
+    powers: 'Super Strength',
+    status: 'deceased',
+    password: 'eternal'
+  },
+  kingo: {
+    name: 'Kingo',
+    theme: 'kingo-theme',
+    role: 'eternal',
+    powers: 'Energy Projection', 
+    status: 'alive',
+    password: 'eternal'
+  },
+  arishem: {
+    name: 'Arishem',
+    theme: 'arishem-theme',
+    role: 'admin',
+    powers: 'Celestial Judge',
+    status: 'alive',
+    password: 'celestial'  
+  }
+};
 
-
-const NavBarLayout = () => {
+const NavBarLayout = ({ currentUser, onLogout }) => {
   return (
     <>
-      <Nav />
+      <Nav currentUser={currentUser} onLogout={onLogout} />
       <Outlet />
     </>
-    )
-  }
+  );
+};
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const handleLogin = (username, password) => {
+    const user = eternalsUsers[username.toLowerCase()];
+    if (user && password === user.password) {
+      setCurrentUser(user);
+      document.body.className = user.theme;
+      return true;
+    }
+    return false;
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    document.body.className = '';
+  };
+
+  const ProtectedRoute = ({ children, adminOnly = false }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
+    }
+    
+    if (adminOnly && currentUser.role !== 'admin') {
+      return <Navigate to="/home" />;
+    }
+    
+    return children;
+  };
+
+
   return (
     <Router>
-      <Routes>      
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route element = {<NavBarLayout />}>
-          <Route exact path="/home" element={<Home />} />
-          <Route exact path="/portfolio" element={<Portfolio />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/calculator" element={<Calculator />} />
-          <Route exact path="/about" element={<About />} />
-          
-        </Route>
-      </Routes>
+      <div className={`app-container ${currentUser?.theme || ''}`}>
+        <Routes>      
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route element={<NavBarLayout currentUser={currentUser} onLogout={handleLogout} />}>
+            <Route path="/login" element={
+              <Login onLogin={handleLogin} currentUser={currentUser} />
+            } />
+            <Route path="/home" element={
+              <ProtectedRoute>
+                <Home currentUser={currentUser} />
+              </ProtectedRoute>
+            } />
+            <Route path="/about" element={
+              <ProtectedRoute>
+                <About currentUser={currentUser} />
+              </ProtectedRoute>
+            } />
+            <Route path="/eternals" element={
+              <ProtectedRoute adminOnly={true}>
+                <Eternals currentUser={currentUser} eternalsUsers={eternalsUsers} />
+              </ProtectedRoute>
+            } />
+          </Route>
+        </Routes>
+      </div>
     </Router>
-
   );
 }
 

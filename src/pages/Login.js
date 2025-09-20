@@ -1,50 +1,77 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
+function Login({ onLogin, currentUser }) {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [title, setTitle] = useState("Welcome to the World Forge");
 
-function Login() {
-    const [username, setUsername] = useState("johndoe") //preset value
-    const [password, setPassword] = useState("")
-    const [title, setTitle] = useState("")
-
-    // placeholder values
-    const realusername = "jesiah";
-    const realpassword = "something";
     const navigate = useNavigate();
 
-    useEffect(() =>{
-        setTitle(`Hello, ${username}`)
-    }, [username])
+    useEffect(() => {
+        if (currentUser) {
+            navigate("/home");
+        }
+    }, [currentUser, navigate]);
 
-    const handleLogin = (e) =>{
+    useEffect(() => {
+        if (username) {
+            setTitle(`Hello, ${username}`);
+        } else {
+            setTitle("Welcome to the World Forge");
+        }
+    }, [username]);
+
+    const handleLogin = (e) => {
         e.preventDefault();
-        if(username === realusername && password === realpassword){
-            alert("Logged In Sucessfully")
-            navigate("/home")
+        if (onLogin(username, password)) {
+            alert("Logged In Successfully");
+            navigate("/home");
+        } else {
+            alert("Invalid credentials!");
         }
-        else{
-            alert("Logged In Error")
-        }
-    }
-    return (
-    
-    <div>
-        <h1>Login Form</h1>
-        <h2>{title}</h2>
-        <form onSubmit={handleLogin}>
-            <div className='form-group'>
-                <label>Username</label>
-                <input type='text' className='form-control' value={username} required maxLength={20} onChange={(e) => setUsername(e.target.value)}></input>
-            </div>
+    };
 
-            <div className='form-group mb-5'>
-                <label>Password</label>
-                <input type='password' className='form-control' value={password} required maxLength={20} onChange={(e) => setPassword(e.target.value)}></input>
+    return (
+        <div className="login-container">
+            <div className="login-form-wrapper">
+                <h1 className="login-title">Login</h1>
+                <h2 className="login-subtitle">{title}</h2>
+                
+                <form onSubmit={handleLogin} className="eternal-login-form">
+                    <div className='form-group mb-3'>
+                        <label className="form-label">Eternal Name</label>
+                        <input 
+                            type='text' 
+                            className='form-control eternal-input' 
+                            value={username} 
+                            required 
+                            maxLength={20} 
+                            placeholder="Enter your eternal name..."
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </div>
+
+                    <div className='form-group mb-4'>
+                        <label className="form-label">Sacred Password</label>
+                        <input 
+                            type='password' 
+                            className='form-control eternal-input' 
+                            value={password} 
+                            required 
+                            maxLength={20} 
+                            placeholder="Enter your sacred password..."
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    
+                    <button type="submit" className="btn btn-danger eternal-login-btn">
+                        Enter the Forge
+                    </button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-danger">Login</button>
-        </form>
-    </div>
-  );
+        </div>
+    );
 }
 
 export default Login;
