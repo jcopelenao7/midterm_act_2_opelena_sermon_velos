@@ -1,0 +1,160 @@
+/* Cosmic Background */
+.about-us-container {
+  background: linear-gradient(135deg, #0b0c10, #1b1f3a, #2c1a47);
+  color: #f1f1f1;
+  text-align: center;
+  padding: 60px 20px;
+  min-height: 100vh;
+  font-family: 'Cinzel', serif;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Floating cosmic aura */
+.about-us-container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(233,69,96,0.2), transparent 70%),
+              radial-gradient(circle, rgba(249,215,28,0.15), transparent 70%);
+  animation: cosmicMove 60s linear infinite;
+  z-index: -1;
+}
+@keyframes cosmicMove {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.about-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    color: #f9d71c;
+    margin-bottom: 25px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(249, 215, 28, 0.8),
+    0 0 40px rgba(81, 131, 255, 0.6);
+    z-index: 1;
+    position: relative;
+}
+
+.about-intro {
+  max-width: 800px;
+  margin: 0 auto 50px auto;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: #e0e0e0;
+  z-index: 1;
+  position: relative;
+}
+
+.eternals-highlight {
+  color: #e94560;
+  font-weight: bold;
+  text-shadow: 0px 0px 8px rgba(233, 69, 96, 0.8);
+}
+
+/* Developer cards */
+.eternal-card {
+    background: rgba(20, 20, 35, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Each card with unique border aura */
+.eternal-card:nth-child(1) {
+  border: 2px solid #f9d71c;
+  box-shadow: 0px 0px 20px rgba(249, 215, 28, 0.4);
+}
+.eternal-card:nth-child(2) {
+  border: 2px solid #5183ff;
+  box-shadow: 0px 0px 20px rgba(81, 131, 255, 0.4);
+}
+.eternal-card:nth-child(3) {
+  border: 2px solid #9b59b6;
+  box-shadow: 0px 0px 20px rgba(155, 89, 182, 0.4);
+}
+
+.eternal-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0px 0px 40px rgba(249, 215, 28, 0.6),
+              0px 0px 60px rgba(233, 69, 96, 0.4);
+}
+
+.dev-img {
+  border-bottom: 2px solid #f9d71c;
+  height: 420px;
+  object-fit: hidden;
+  border-radius: 10px 10px 0 0;
+}
+
+.card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: #f9d71c;
+    margin-bottom: 15px;
+}
+
+.card-text {
+  font-size: 1.05rem;
+  color: #dcdcdc;
+}
+
+/* Developer Links */
+.dev-links {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.dev-links a {
+  color: #f9d71c;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.dev-links a:hover {
+  color: #5183ff;
+  text-shadow: 0px 0px 10px rgba(81, 131, 255, 0.8);
+}
+
+/* Button */
+.back-btn {
+  margin-top: 50px;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 14px 36px;
+  background: #111827; /* dark base so text always visible */
+  color: #f9d71c;
+  border: 2px solid #f9d71c;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px rgba(249, 215, 28, 0.6);
+  transition: all 0.4s ease-in-out;
+}
+
+.back-btn:hover {
+  background: linear-gradient(90deg, #e94560, #f9d71c);
+  color: #0b0c10;
+  border-color: #e94560;
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.8),
+              0 0 30px rgba(249, 215, 28, 0.6);
+  transform: scale(1.05);
+}
+
+.card-text, .about-intro, .dev-links a {
+  font-family: 'Montserrat', sans-serif;
+}
