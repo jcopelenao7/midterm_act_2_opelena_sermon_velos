@@ -8,8 +8,8 @@ function Login() {
     const [title, setTitle] = useState("")
 
     // placeholder values
-    const realusername = "admin";
-    const realpassword = "adminpassword";
+    const realusername = "jesiah";
+    const realpassword = "mcdo";
     const navigate = useNavigate();
 
     useEffect(() =>{
