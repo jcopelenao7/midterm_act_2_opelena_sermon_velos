@@ -9,7 +9,7 @@ function Login() {
 
     // placeholder values
     const realusername = "jesiah";
-    const realpassword = "mcdo";
+    const realpassword = "something";
     const navigate = useNavigate();
 
     useEffect(() =>{
