@@ -1,6 +1,5 @@
-// App.js
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Nav from './Nav';
 import Home from './pages/Home'; 
@@ -62,6 +61,17 @@ const NavBarLayout = ({ currentUser, onLogout }) => {
   );
 };
 
+// Create a wrapper component for Error that has access to navigate
+const ErrorWrapper = ({ currentUser }) => {
+  const navigate = useNavigate();
+  
+  const handleGoHome = () => {
+    navigate('/home');
+  };
+  
+  return <Error currentUser={currentUser} onGoHome={handleGoHome} />;
+};
+
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -97,6 +107,8 @@ function App() {
       <div className={`app-container ${currentUser?.theme || ''}`}>
         <Routes>      
           <Route path="/" element={<Navigate to="/home" />} />
+          
+          {/* Regular routes with NavBar */}
           <Route element={<NavBarLayout currentUser={currentUser} onLogout={handleLogout} />}>
             <Route path="/login" element={
               <Login onLogin={handleLogin} currentUser={currentUser} />
@@ -116,8 +128,9 @@ function App() {
                 <Eternals currentUser={currentUser} eternalsUsers={eternalsUsers} />
               </ProtectedRoute>
             } />
-            {/* Catch-all route for 404 errors - MUST be last */}
-            <Route path="*" element={<Error />} />
+            
+            {/* Error route moved inside NavBarLayout so it has access to currentUser */}
+            <Route path="*" element={<ErrorWrapper currentUser={currentUser} />} />
           </Route>
         </Routes>
       </div>

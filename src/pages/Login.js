@@ -34,8 +34,7 @@ function Login({ onLogin, currentUser }) {
 
     const handleLogin = () => {
         if (onLogin(username, password)) {
-            alert("Logged In Successfully");
-                navigate("/home");
+            navigate("/home");
         } else {
             alert("Invalid credentials!");
         }
@@ -78,7 +77,7 @@ function Login({ onLogin, currentUser }) {
 
                     <div className='form-group mb-4'>
                         <label className="form-label">
-                            {isCelestial ? 'Divine Password' : 'Sacred Password'}
+                            {isCelestial ? 'Emanation Key' : 'Sacred Password'}
                         </label>
                         <input 
                             type='password' 
@@ -86,7 +85,7 @@ function Login({ onLogin, currentUser }) {
                             value={password} 
                             required 
                             maxLength={20} 
-                            placeholder={isCelestial ? "Enter your divine password..." : "Enter your sacred password..."}
+                            placeholder={isCelestial ? "Rewrite your boundless promise..." : "Enter your sacred password..."}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>

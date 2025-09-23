@@ -42,7 +42,7 @@ function EternalsStatus({ currentUser, eternalsUsers }) {
                         {eternal.status === 'deceased' && (
                             <div className="memorial-section">
                                 <p className="memorial-text">
-                                    💫 Their eternal essence lives on in cosmic memory
+                                    Their eternal essence lives on in cosmic memory
                                 </p>
                             </div>
                         )}
